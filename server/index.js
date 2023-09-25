@@ -181,11 +181,12 @@ connect.post('/Removeuser/:id',(request,response)=>
 })
 
 
-connect.put('/Update',(request,response)=>
+connect.put('/Update/:pid',(request,response)=>
 {
-    let {pid}=request.body
-    let sql='update from products set modelnumber=? and price=? where pid=?'
-    dbconnection.query(sql,[pid],(error,result)=>
+    let {pid}=request.params
+    let {modelnumber,price}=request.body
+    let sql='update products set modelnumber=?, price=? where pid=?'
+    dbconnection.query(sql,[modelnumber,price,pid],(error,result)=>
     {
         if(error)
         {

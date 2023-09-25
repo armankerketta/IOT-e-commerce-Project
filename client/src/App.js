@@ -28,8 +28,8 @@ function App() {
       <Route path='/Adduser' element={[<Nav/>,<Adduser/>]}/>
       <Route path='/Removeuser/:id' element={[<nav/>,<Removeuser/>]}/>
       <Route path='/Admindashboard/:id' element={[<Nav/>,<Admindashboard/>]}/>
-      <Route path='/Update/:id' element={[<nav/>,<Update/>]}/>
-      <Route path='/Clientdashboard' element={[<Nav/>,<Clientdashboard/>]}/>
+      <Route path='/Update/:pid' element={[<nav/>,<Update/>]}/>
+      <Route path='/Clientdashboard/:id' element={[<Nav/>,<Clientdashboard/>]}/>
     </Routes>
     </BrowserRouter>
     </>

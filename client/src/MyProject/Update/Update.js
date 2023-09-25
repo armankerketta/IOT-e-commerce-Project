@@ -10,10 +10,10 @@ export function Update()
 
     useEffect(()=>
     {
-        fetch("http://localhost:3021/Getsingle"+pid)
+        fetch("http://localhost:3021/Getsingle/"+pid)
         .then(res=>res.json())
         .then((data)=>{
-            setModelnumber(data[0],modelnumber)
+            setModelnumber(data[0].modelnumber)
             setPrice(data[0].price)
             
         })
@@ -24,9 +24,9 @@ export function Update()
 
     function handleupdate(event)
     {
-        event.preventDefalut()
+        event.preventDefault()
         var modelnumber=document.getElementById("modelnumber").value;
-        var cost=document.getElementById("price").value;
+        var price=document.getElementById("price").value;
 
         var key={
             modelnumber:modelnumber,
@@ -43,7 +43,7 @@ export function Update()
             alert("Enter the price")
         }
         else{
-            axios.post("http://localhvsost:3021/Update" + pid, key)
+            axios.put("http://localhost:3021/Update/" + pid, key)
             .then((res)=>
             {
                 if(res.data.status=="error")
@@ -54,7 +54,7 @@ export function Update()
                 else if(res.data.status==="success")
                 {
                     alert("data are insereted")
-                    window.location.href ='/Getsingle/:id'
+                    window.location.href =`/Getsingle/${pid}`
                 }
             })
         }
@@ -62,19 +62,24 @@ export function Update()
 
     return(
         <>
+        <section>
         <h1>Update</h1>
         <div>
             <form onSubmit={handleupdate} className="">
                 <table>
                     <tr>
                         <td><label>Model No</label></td>
-                        <td><input type="text" id="modelnumber" onChange={(a)=> setModelnumber(a.target.value)} value={modelnumber}></input></td>
+                        <td><input type="text" id="modelnumber" onChange={(a)=> setModelnumber(a.target.value)} value={modelnumber}/></td>
                     </tr>
-                    <tr><label>Price</label></tr>
-                    <td><input type="text" id="price" onChange={(a)=> setPrice(a.target.value)} value={price}></input></td>
+                        <tr><label>Price</label></tr>
+                        <td><input type="text" id="price" onChange={(a)=> setPrice(a.target.value)} value={price}/></td>
+                    <td>
+                        <td><button type="submit" className="btn btn-info">Update product</button></td>
+                    </td>
                 </table>
             </form>
         </div>
+        </section>
         </>
     );
 }
